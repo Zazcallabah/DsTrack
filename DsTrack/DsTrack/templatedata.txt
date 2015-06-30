@@ -1,0 +1,37 @@
+struct BND4 meta		0h	2C0h	Fg: Bg:0xE0E0E0	
+struct SaveSlot slot[0]		2C0h	60020h	Fg: Bg:0xE0E0E0	
+struct ChecksumHeader header		2C0h	10h	Fg: Bg:0xFFE0FF	
+uint length	393216	2D0h	4h	Fg: Bg:0xE0E0E0	
+struct StatsUnknown1 unknown		2D4h	58h	Fg: Bg:0xFFE0FF	unknown data
+struct Stats stats		32Ch	104h	Fg: Bg:0xE0E0E0	
+struct Pack pack		430h	164h	Fg: Bg:0xE0E0E0	
+uint backpack_items_amount	24	594h	4h	Fg: Bg:0xE0E0E0	
+uint backpack_keys_amount	4	598h	4h	Fg: Bg:0xE0E0E0	
+uint backpack_size	2048	59Ch	4h	Fg: Bg:0xE0E0E0	
+struct PartiallyUsedBox util_box		5A0h	700h	Fg: Bg:0xE0E0E0	
+struct PartiallyUsedBox item_box		CA0h	D900h	Fg: Bg:0xE0E0E0	
+uint lastindex	87	E5A0h	4h	Fg: Bg:0xE0E0E0	
+struct Attuned attunementslots[12]		E5A4h	60h	Fg: Bg:0xE0E0E0	
+uint UnknownData1	0	E604h	4h	Fg: Bg:0xE0E0E0	
+uint equippedItems[5]		E608h	14h	Fg: Bg:0xE0E0E0	
+byte UnknownData2[40]	M	E61Ch	28h	Fg: Bg:0xE0E0E0	
+struct Color hair		E644h	10h	Fg: Bg:0xE0E0E0	
+struct Color eye		E654h	10h	Fg: Bg:0xE0E0E0	
+BYTE UnknownData3[50]		E664h	32h	Fg: Bg:0xE0E0E0	
+ubyte skintone	171	E696h	1h	Fg: Bg:0xE0E0E0	
+byte UnknownData4[57]		E697h	39h	Fg: Bg:0xE0E0E0	
+struct BottomlessBox box[2048]		E6D0h	10000h	Fg: Bg:0xE0E0E0	
+BYTE UnknownData5[280]		1E6D0h	118h	Fg: Bg:0xE0E0E0	
+ushort playthrough	0	1E7E8h	2h	Fg: Bg:0xE0E0E0	ng+ counter?
+uint UnknownData6[2]		1E7EAh	8h	Fg: Bg:0xE0E0E0	
+struct UnknownBox unknown_box[64]		1E7F2h	800h	Fg: Bg:0xE0E0E0	
+byte UnknownData7[1014]		1EFF2h	3F6h	Fg: Bg:0xE0E0E0	
+uint deathcount	3	1F3E8h	4h	Fg: Bg:0xE0E0E0	
+byte UnknownData8[38]		1F3ECh	26h	Fg: Bg:0xE0E0E0	
+struct Bonfires enabledBonfires		1F412h	4h	Fg: Bg:0xE0E0E0	
+BYTE data[93668]		1F416h	16DE4h	Fg: Bg:0x80FFFF	
+ubyte onlineprofiles[20350]		361FAh	4F7Eh	Fg: Bg:0xE0E0E0	
+BYTE data2[151884]		3B178h	2514Ch	Fg: Bg:0x80FFFF	
+struct Checksum secondary		602C4h	10h	Fg: Bg:0xFFE0FF	
+BYTE offset[12]		602D4h	Ch	Fg: Bg:0x8080FF	
+struct SaveSlot slot[1]		602E0h	60020h	Fg: Bg:0xE0E0E0	
