@@ -1,0 +1,69 @@
+﻿using System;
+
+namespace DsTrack
+{
+	public class Result
+	{
+		/// <summary>
+		/// word-aligned
+		/// </summary>
+		public int Address { get; private set; }
+
+		/// <summary>
+		/// 0 is lsb
+		/// 31 is msb
+		/// </summary>
+		public int Bit { get; private set; }
+
+		public int LabelIndex { get; private set; }
+
+		public Result( int address, int bit, int labelIndex )
+		{
+			Address = address;
+			Bit = bit;
+			LabelIndex = labelIndex;
+		}
+
+<<<<<<< HEAD
+		public override string ToString()
+		{
+			var ofadr = Address + InitialOffset;
+			var currentline = "";
+
+			if( Lines != null )
+				for( var i = 0; i < Lines.Length - 1; i++ )
+				{
+					if( ofadr >= Lines[i].Address && ofadr < Lines[i + 1].Address )
+					{
+						currentline = Lines[i].Type;
+						break;
+					}
+				}
+
+			return string.Format( "{0:X5}-{1:00}: {2} ({3})", ofadr, Bit, Track.Labels[LabelIndex], currentline );
+		}
+
+		public static int InitialOffset { get; set; }
+		public static Line[] Lines { get; set; }
+	}
+
+	public class Line
+	{
+		public string Type { get; set; }
+		public int Address { get; set; }
+		public Line( string s )
+		{
+			var split = s.Split( '\t' );
+			Type = split[0];
+			Address = Int32.Parse( split[2].TrimEnd( 'h' ), System.Globalization.NumberStyles.HexNumber );
+=======
+		/// <summary>
+		/// Address correction due to bigendian uints
+		/// </summary>
+		public int BitOffset()
+		{
+			return Address + ( Bit / -8 ) + 3;
+>>>>>>> 3c9bc7a... templatefile is now responsible for finding correct line for address
+		}
+	}
+}
