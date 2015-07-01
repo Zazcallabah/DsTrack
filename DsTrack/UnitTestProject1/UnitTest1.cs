@@ -23,7 +23,7 @@ namespace UnitTestProject1
 			handler.AddFolder( @"C:\src\git\dsfp\templates\d" );
 
 			var rd = new ResultDisplay( handler, new TemplateFile( @"C:\src\git\dsfp\DsTrack\DsTrack\templatedata.txt" ) );
-			foreach( var r in rd.Display() )
+			foreach( var r in rd.Display().Where( s => !s.Contains( "PartiallyUsed" ) ) )
 			{
 				var l = File.ReadAllLines( path );
 				var lines = l.Select( s => new Line( s ) ).ToArray();
