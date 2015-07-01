@@ -24,37 +24,12 @@ namespace DsTrack
 			LabelIndex = labelIndex;
 		}
 
-		public override string ToString()
+		/// <summary>
+		/// Address correction due to bigendian uints
+		/// </summary>
+		public int BitOffset()
 		{
-			var ofadr = Address + InitialOffset;
-			var currentline = "";
-
-			if( Lines != null )
-				for( var i = 0; i < Lines.Length - 1; i++ )
-				{
-					if( ofadr >= Lines[i].Address && ofadr < Lines[i + 1].Address )
-					{
-						currentline = Lines[i].Type;
-						break;
-					}
-				}
-
-			return string.Format( "{0:X5}-{1:00}: {2} ({3})", ofadr, Bit, Track.Labels[LabelIndex], currentline );
-		}
-
-		public static int InitialOffset { get; set; }
-		public static Line[] Lines { get; set; }
-	}
-
-	public class Line
-	{
-		public string Type { get; set; }
-		public int Address { get; set; }
-		public Line( string s )
-		{
-			var split = s.Split( '\t' );
-			Type = split[0];
-			Address = Int32.Parse( split[2].TrimEnd( 'h' ), System.Globalization.NumberStyles.HexNumber );
+			return Address + ( Bit / -8 ) + 3;
 		}
 	}
 }

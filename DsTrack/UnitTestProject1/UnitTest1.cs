@@ -19,8 +19,11 @@ namespace UnitTestProject1
 		[Test]
 		public void metatest()
 		{
-			var path = @"C:\src\git\dsfp\DsTrack\DsTrack\templatedata.txt";
-			if( File.Exists( path ) )
+			var handler = new Handler();
+			handler.AddFolder( @"C:\src\git\dsfp\templates\d" );
+
+			var rd = new ResultDisplay( handler, new TemplateFile( @"C:\src\git\dsfp\DsTrack\DsTrack\templatedata.txt" ) );
+			foreach( var r in rd.Display() )
 			{
 				var l = File.ReadAllLines( path );
 				var lines = l.Select( s => new Line( s ) ).ToArray();
@@ -44,7 +47,45 @@ namespace UnitTestProject1
 		}
 
 		[Test]
-		public void candoFiles()
+		public void CanReturnDisplay()
+		{
+			var l = new TemplateFile( new[] { "l1\t\t0h", "l2\t\t1h", "l3\t\t2h", "l4\t\t3h" } );
+			var data = new uint[] { 0 };
+			var data2 = new uint[] { 0xF0001324 };
+			var data3 = new uint[] { 0x11001000 };
+			var inputarr = new[] { new Input( data, "s1" ), new Input( data2, "s2" ), new Input( data3, "s3" ) };
+
+			var h = new Handler( 0, 4 );
+			foreach( var i in inputarr )
+				h.AddInput( i );
+
+			var rd = new ResultDisplay( h, l );
+			var strings = rd.Display().ToArray();
+
+			Assert.AreEqual( 3, strings.Length );
+			Assert.AreEqual( "00000-4: s2 (l1)", strings[0] );
+			Assert.AreEqual( "00000-0: s3 (l1)", strings[1] );
+			Assert.AreEqual( "00002-4: s2 (l3)", strings[2] );
+
+		}
+
+		[Test]
+		public void GivenTemplateLines_CanReturnCorrectlineForResult()
+		{
+			var l = new TemplateFile( new[] { "l1\t\t0h", "l2\t\t1h", "l3\t\t2h", "l4\t\t3h" } );
+
+			for( int i = 0; i < 8; i++ )
+				Assert.AreEqual( "l4", l.EntryFor( new Result( 0, i, 0 ), 0 ) );
+			for( int i = 0; i < 8; i++ )
+				Assert.AreEqual( "l3", l.EntryFor( new Result( 0, 8 + i, 0 ), 0 ) );
+			for( int i = 0; i < 8; i++ )
+				Assert.AreEqual( "l2", l.EntryFor( new Result( 0, 16 + i, 0 ), 0 ) );
+			for( int i = 0; i < 8; i++ )
+				Assert.AreEqual( "l1", l.EntryFor( new Result( 0, 24 + i, 0 ), 0 ) );
+		}
+
+		[Test]
+		public void CanReadActualFiles_AndGetSomeSortOfResult()
 		{
 			var h = new Handler();
 			h.Add( "DRAKS0005.sl2" );

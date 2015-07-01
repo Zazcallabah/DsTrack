@@ -40,7 +40,24 @@ namespace DsTrack
 			_inputs.Add( new Input( uintData, Path.GetFileNameWithoutExtension( filepath ) ) );
 		}
 
-		public Result[] Make()
+		public void AddFile( string filepath )
+		{
+			_inputs.Add(
+				_factory.MakeInputFromBytes(
+					File.ReadAllBytes( filepath ),
+					Path.GetFileNameWithoutExtension( filepath )
+			) );
+		}
+
+		/// <summary>
+		/// This is mainly for testing
+		/// </summary>
+		public void AddInput( Input inp )
+		{
+			_inputs.Add( inp );
+		}
+
+		public IEnumerable<Result> Make()
 		{
 			Track.Labels = _inputs.Select( i => i.Label ).ToArray();
 			var arr = _inputs.ToArray();

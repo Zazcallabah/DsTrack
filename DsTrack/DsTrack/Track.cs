@@ -42,8 +42,8 @@ namespace DsTrack
 		public Result[] Make()
 		{
 			var l = new List<Result>();
-			uint bitmask = 0x1;
-			for( var i = 0; i < 32; i++ )
+			uint bitmask = 0x80000000;
+			for( var i = 31; i >= 0; i-- )
 			{
 				if( ( bitmask & _flags ) != 0 )
 				{
@@ -56,7 +56,7 @@ namespace DsTrack
 						}
 					}
 				}
-				bitmask = bitmask << 1;
+				bitmask = bitmask >> 1;
 			}
 			return l.ToArray();
 		}
